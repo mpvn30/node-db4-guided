@@ -20,8 +20,16 @@ exports.up = function(knex) {
     })
     .createTable('zoo-animals', tbl => {
         tbl.increments();
-        tbl.integer('zoo_id').unsigned().references('id').inTable('zoo-animals')
-        tbl.integer('animal_id').unsigned().references('id').inTable('zoo-animals')
+        tbl.integer('zoo_id')
+        .unsigned()
+        .references('id')
+        .inTable('zoos')
+        .onDelete('RESTRICT')
+        .onUpdate('CASCADE')
+        tbl.integer('animal_id')
+        .unsigned()
+        .references('id')
+        .inTable('animals')
         .onDelete('RESTRICT')
         .onUpdate('CASCADE')
     })
